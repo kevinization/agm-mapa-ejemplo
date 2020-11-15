@@ -1,0 +1,9 @@
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId"> <!-- Creación del mapa -->
+  <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="located"><!-- Creación del marcador. El if es para que si located está en true, el marcador se muestre (o sea al obtener la posición actual) -->
+    <agm-info-window> <!-- Es la información que sale al darle click al marcador -->
+      <h3>Casa de Kevin</h3>
+      <span>No hay nada alrededor</span>
+    </agm-info-window>
+  </agm-marker> 
+</agm-map> 
+<button (click)="obtenerPosicionActual()">Obtener posición actual</button>
