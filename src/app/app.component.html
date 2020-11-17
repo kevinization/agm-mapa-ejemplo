@@ -1,9 +1,25 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId"> <!-- Creación del mapa -->
-  <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="located"><!-- Creación del marcador. El if es para que si located está en true, el marcador se muestre (o sea al obtener la posición actual) -->
+<agm-map 
+[latitude]="lat" 
+[longitude]="lng" 
+[zoom]="zoom" 
+[mapTypeId]="mapTypeId"
+(mapClick)="mapClicked($event)"> <!-- Creación del mapa -->
+
+  <agm-marker 
+  *ngFor="let m of markers; let i = index"
+    (markerClick)="clickedMarker(m.label, i)"
+    [latitude]="m.lat"
+    [longitude]="m.lng"
+    [label]="m.label"
+    [markerDraggable]="m.draggable"
+    (dragEnd)="markerDragEnd(m, $event)"><!-- Creación del marcador. El if es para que si located está en true, el marcador se muestre (o sea al obtener la posición actual) -->
+    
     <agm-info-window> <!-- Es la información que sale al darle click al marcador -->
       <h3>Casa de Kevin</h3>
       <span>No hay nada alrededor</span>
     </agm-info-window>
+
   </agm-marker> 
 </agm-map> 
 <button (click)="obtenerPosicionActual()">Obtener posición actual</button>
+<button (click)="coordsFinales()">Obtener coordenadas finales</button>
